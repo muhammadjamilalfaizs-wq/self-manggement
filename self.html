@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+        }
+        
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            background-color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-btn i {
+            font-size: 1.1rem;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-light);
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-header h2 i {
+            color: var(--accent);
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+        }
+        
+        /* Card Styles */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card p {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .card .amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 1rem 0;
+        }
+        
+        /* Calendar & Apps Integration */
+        .integration-section {
+            margin-top: 3rem;
+            background-color: #f8f9ff;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px dashed var(--accent);
+        }
+        
+        .integration-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .apps-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .app-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 180px;
+            text-align: center;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .app-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .app-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .app-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--gray-light);
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 90%;
+                justify-content: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+        
+        /* Data List */
+        .data-list {
+            margin-top: 2rem;
+        }
+        
+        .data-item {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .data-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .data-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .data-actions {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-user-circle"></i> Personal Website</h1>
+            <p>Kelola keuangan dan waktu Anda dengan lebih efektif dan efisien</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="money-management">
+                <i class="fas fa-money-bill-wave"></i> Money Management
+            </button>
+            <button class="tab-btn" data-tab="time-management">
+                <i class="fas fa-clock"></i> Time Management
+            </button>
+            <button class="tab-btn" data-tab="integrations">
+                <i class="fas fa-link"></i> Integrasi & Aplikasi
+            </button>
+        </div>
+        
+        <!-- Money Management Tab -->
+        <div class="tab-content active" id="money-management">
+            <div class="section-header">
+                <h2><i class="fas fa-coins"></i> Money Management</h2>
+                <button class="btn btn-success" id="add-money-data">
+                    <i class="fas fa-plus"></i> Tambah Data
+                </button>
+            </div>
+            
+            <!-- Pendataan Pemasukan -->
+            <div class="form-group">
+                <h3><i class="fas fa-arrow-down text-success"></i> Pendataan Pemasukan</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="income-source">Pemasukan dari mana?</label>
+                        <select id="income-source">
+                            <option value="">Pilih sumber pemasukan</option>
+                            <option value="gaji">Gaji</option>
+                            <option value="bisnis">Bisnis</option>
+                            <option value="investasi">Investasi</option>
+                            <option value="hadiah">Hadiah</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="income-date">Tanggal & Jam</label>
+                        <input type="datetime-local" id="income-date">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="income-method">Cash / M-Banking?</label>
+                        <select id="income-method">
+                            <option value="cash">Cash</option>
+                            <option value="m-banking">M-Banking</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="income-bank">M-Banking apa? (jika pilih M-Banking)</label>
+                        <select id="income-bank">
+                            <option value="">Pilih bank</option>
+                            <option value="bca">BCA</option>
+                            <option value="mandiri">Mandiri</option>
+                            <option value="bri">BRI</option>
+                            <option value="bni">BNI</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="income-amount">Jumlah Pemasukan</label>
+                    <input type="number" id="income-amount" placeholder="Masukkan jumlah pemasukan">
+                </div>
+                
+                <button class="btn btn-success">
+                    <i class="fas fa-save"></i> Simpan Pemasukan
+                </button>
+            </div>
+            
+            <!-- Pendataan Pengeluaran -->
+            <div class="form-group">
+                <h3><i class="fas fa-arrow-up text-danger"></i> Pendataan Pengeluaran</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expense-for">Pengeluaran untuk apa?</label>
+                        <input type="text" id="expense-for" placeholder="Contoh: Beli makanan, transportasi, dll">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expense-date">Tanggal & Jam</label>
+                        <input type="datetime-local" id="expense-date">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expense-method">Cash / M-Banking?</label>
+                        <select id="expense-method">
+                            <option value="cash">Cash</option>
+                            <option value="m-banking">M-Banking</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expense-bank">M-Banking apa? (jika pilih M-Banking)</label>
+                        <select id="expense-bank">
+                            <option value="">Pilih bank</option>
+                            <option value="bca">BCA</option>
+                            <option value="mandiri">Mandiri</option>
+                            <option value="bri">BRI</option>
+                            <option value="bni">BNI</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="expense-amount">Jumlah Pengeluaran</label>
+                    <input type="number" id="expense-amount" placeholder="Masukkan jumlah pengeluaran">
+                </div>
+                
+                <button class="btn btn-warning">
+                    <i class="fas fa-save"></i> Simpan Pengeluaran
+                </button>
+            </div>
+            
+            <!-- Tabungan & Investasi -->
+            <div class="form-group">
+                <h3><i class="fas fa-piggy-bank text-primary"></i> Tabungan & Investasi</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="saving-type">Tabung / Investasi?</label>
+                        <select id="saving-type">
+                            <option value="tabungan">Tabungan</option>
+                            <option value="investasi">Investasi</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="saving-place">Dimana? (Nama bank/platform)</label>
+                        <input type="text" id="saving-place" placeholder="Contoh: Bank BCA, Bibit, Stockbit">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="saving-method">Cash / M-Banking?</label>
+                        <select id="saving-method">
+                            <option value="cash">Cash</option>
+                            <option value="m-banking">M-Banking</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="saving-amount">Jumlah</label>
+                    <input type="number" id="saving-amount" placeholder="Masukkan jumlah">
+                </div>
+                
+                <button class="btn">
+                    <i class="fas fa-save"></i> Simpan Data Tabungan/Investasi
+                </button>
+            </div>
+            
+            <!-- Data Ringkasan -->
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Total Pemasukan <i class="fas fa-arrow-down text-success"></i></h3>
+                    <p class="amount">Rp 5.250.000</p>
+                    <p>Bulan ini: Rp 2.500.000</p>
+                    <p>Minggu ini: Rp 750.000</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Total Pengeluaran <i class="fas fa-arrow-up text-danger"></i></h3>
+                    <p class="amount">Rp 3.800.000</p>
+                    <p>Bulan ini: Rp 1.200.000</p>
+                    <p>Minggu ini: Rp 350.000</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Tabungan & Investasi <i class="fas fa-piggy-bank text-primary"></i></h3>
+                    <p class="amount">Rp 12.500.000</p>
+                    <p>Tabungan: Rp 8.000.000</p>
+                    <p>Investasi: Rp 4.500.000</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Time Management Tab -->
+        <div class="tab-content" id="time-management">
+            <div class="section-header">
+                <h2><i class="fas fa-clock"></i> Time Management</h2>
+                <button class="btn btn-success" id="add-schedule">
+                    <i class="fas fa-plus"></i> Tambah Jadwal
+                </button>
+            </div>
+            
+            <!-- Jam Kerja -->
+            <div class="form-group">
+                <h3><i class="fas fa-briefcase"></i> Jam Kerja</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="work-days">Hari apa saja?</label>
+                        <select id="work-days" multiple>
+                            <option value="senin">Senin</option>
+                            <option value="selasa">Selasa</option>
+                            <option value="rabu">Rabu</option>
+                            <option value="kamis">Kamis</option>
+                            <option value="jumat">Jumat</option>
+                            <option value="sabtu">Sabtu</option>
+                            <option value="minggu">Minggu</option>
+                        </select>
+                        <small>Tekan Ctrl untuk memilih lebih dari satu</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="work-start">Dari jam berapa?</label>
+                        <input type="time" id="work-start" value="08:00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="work-end">Sampai jam berapa?</label>
+                        <input type="time" id="work-end" value="17:00">
+                    </div>
+                </div>
+                
+                <button class="btn">
+                    <i class="fas fa-save"></i> Simpan Jadwal Kerja
+                </button>
+            </div>
+            
+            <!-- Hari Main -->
+            <div class="form-group">
+                <h3><i class="fas fa-gamepad"></i> Hari Main / Rekreasi</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="play-day">Hari apa?</label>
+                        <select id="play-day">
+                            <option value="sabtu">Sabtu</option>
+                            <option value="minggu">Minggu</option>
+                            <option value="lainnya">Hari Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="play-start">Dari jam berapa?</label>
+                        <input type="time" id="play-start" value="14:00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="play-end">Sampai jam berapa?</label>
+                        <input type="time" id="play-end" value="20:00">
+                    </div>
+                </div>
+                
+                <button class="btn">
+                    <i class="fas fa-save"></i> Simpan Jadwal Main
+                </button>
+            </div>
+            
+            <!-- Jam Kuliah & Tugas -->
+            <div class="form-group">
+                <h3><i class="fas fa-graduation-cap"></i> Jam Kuliah & Tugas</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="study-days">Hari apa saja?</label>
+                        <select id="study-days" multiple>
+                            <option value="senin">Senin</option>
+                            <option value="selasa">Selasa</option>
+                            <option value="rabu">Rabu</option>
+                            <option value="kamis">Kamis</option>
+                            <option value="jumat">Jumat</option>
+                            <option value="sabtu">Sabtu</option>
+                        </select>
+                        <small>Tekan Ctrl untuk memilih lebih dari satu</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="study-start">Dari jam berapa?</label>
+                        <input type="time" id="study-start" value="18:00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="study-end">Sampai jam berapa?</label>
+                        <input type="time" id="study-end" value="22:00">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="task-hours">Perkiraan jam untuk mengerjakan tugas (per minggu)</label>
+                    <input type="number" id="task-hours" placeholder="Contoh: 10" min="0">
+                </div>
+                
+                <button class="btn">
+                    <i class="fas fa-save"></i> Simpan Jadwal Kuliah & Tugas
+                </button>
+            </div>
+            
+            <!-- Jadwal Mingguan -->
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Jadwal Hari Ini <i class="fas fa-calendar-day"></i></h3>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Kerja</h4>
+                                <p>08:00 - 17:00</p>
+                            </div>
+                            <span class="badge" style="background-color:#4ade80; color:white; padding:3px 8px; border-radius:20px;">Aktif</span>
+                        </div>
+                        
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Kuliah</h4>
+                                <p>18:00 - 22:00</p>
+                            </div>
+                            <span class="badge" style="background-color:#f59e0b; color:white; padding:3px 8px; border-radius:20px;">Nanti</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Jadwal Besok <i class="fas fa-calendar-alt"></i></h3>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Kerja</h4>
+                                <p>08:00 - 17:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Main dengan teman</h4>
+                                <p>19:00 - 22:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Statistik Waktu <i class="fas fa-chart-pie"></i></h3>
+                    <p>Total jam kerja/minggu: <strong>45 jam</strong></p>
+                    <p>Total jam kuliah/minggu: <strong>12 jam</strong></p>
+                    <p>Total jam tugas/minggu: <strong>10 jam</strong></p>
+                    <p>Total waktu luang/minggu: <strong>20 jam</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Integrations Tab -->
+        <div class="tab-content" id="integrations">
+            <div class="section-header">
+                <h2><i class="fas fa-link"></i> Integrasi & Aplikasi</h2>
+                <p>Terhubung dengan aplikasi eksternal untuk manajemen yang lebih baik</p>
+            </div>
+            
+            <div class="integration-section">
+                <h3>Terhubung ke Kalender</h3>
+                <p>Sinkronkan jadwal Anda dengan kalender favorit Anda</p>
+                
+                <div class="apps-container">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <h4>Google Calendar</h4>
+                        <p>Sinkronkan jadwal dengan Google Calendar</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <h4>Apple Calendar</h4>
+                        <p>Sinkronkan dengan kalender di perangkat Apple</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Outlook Calendar</h4>
+                        <p>Integrasikan dengan Microsoft Outlook</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="integration-section">
+                <h3>Alarm & Pengingat</h3>
+                <p>Atur alarm dan pengingat untuk aktivitas penting</p>
+                
+                <div class="apps-container">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h4>Alarm Bawaan</h4>
+                        <p>Atur alarm langsung dari website ini</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Atur Alarm</button>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <h4>Google Reminders</h4>
+                        <p>Buat pengingat di Google Assistant</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <h4>Apple Reminders</h4>
+                        <p>Integrasikan dengan Apple Reminders</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="integration-section">
+                <h3>Aplikasi Catatan (iOS)</h3>
+                <p>Terhubung dengan aplikasi catatan untuk mencatat hal penting</p>
+                
+                <div class="apps-container">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-sticky-note"></i>
+                        </div>
+                        <h4>Apple Notes</h4>
+                        <p>Sinkronkan catatan dengan Apple Notes</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fab fa-evernote"></i>
+                        </div>
+                        <h4>Evernote</h4>
+                        <p>Integrasikan dengan Evernote</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <h4>Notion</h4>
+                        <p>Terhubung dengan Notion untuk catatan lengkap</p>
+                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Status Integrasi <i class="fas fa-plug"></i></h3>
+                    <div class="data-list">
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Google Calendar</h4>
+                                <p>Terhubung - Terakhir sinkron: 2 jam lalu</p>
+                            </div>
+                            <span class="badge" style="background-color:#4ade80; color:white; padding:3px 8px; border-radius:20px;">Aktif</span>
+                        </div>
+                        
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Apple Notes</h4>
+                                <p>Siap dihubungkan</p>
+                            </div>
+                            <button class="btn btn-small">Hubungkan</button>
+                        </div>
+                        
+                        <div class="data-item">
+                            <div class="data-info">
+                                <h4>Alarm Bawaan</h4>
+                                <p>3 alarm aktif</p>
+                            </div>
+                            <span class="badge" style="background-color:#4ade80; color:white; padding:3px 8px; border-radius:20px;">Aktif</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <p>Personal Website &copy; 2023 | Dibuat dengan <i class="fas fa-heart" style="color:#ef4444;"></i> untuk manajemen kehidupan yang lebih baik</p>
+            <p>Website ini responsif dan dapat diakses dari perangkat mobile maupun desktop</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Tab Switching Functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and content
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Form Submission Simulation
+        document.querySelectorAll('.btn').forEach(button => {
+            if (button.textContent.includes('Simpan')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Data berhasil disimpan!');
+                });
+            }
+        });
+        
+        // Connect Button Simulation
+        document.querySelectorAll('.btn-small').forEach(button => {
+            if (button.textContent.includes('Hubungkan')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Aplikasi berhasil dihubungkan!');
+                });
+            }
+            
+            if (button.textContent.includes('Atur Alarm')) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const alarmTime = prompt('Masukkan waktu untuk alarm (HH:MM):', '08:00');
+                    if (alarmTime) {
+                        alert(`Alarm berhasil diatur untuk pukul ${alarmTime}`);
+                    }
+                });
+            }
+        });
+        
+        // Add Money Data Button
+        document.getElementById('add-money-data').addEventListener('click', function() {
+            alert('Fitur tambah data keuangan akan membuka form lengkap');
+        });
+        
+        // Add Schedule Button
+        document.getElementById('add-schedule').addEventListener('click', function() {
+            alert('Fitur tambah jadwal akan membuka form jadwal lengkap');
+        });
+        
+        // Initialize with current date/time for forms
+        window.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const currentDateTime = now.toISOString().slice(0, 16);
+            
+            // Set current date/time to date inputs
+            document.querySelectorAll('input[type="datetime-local"]').forEach(input => {
+                if (!input.value) {
+                    input.value = currentDateTime;
+                }
+            });
+            
+            // Set current time to time inputs
+            const currentTime = now.toTimeString().slice(0, 5);
+            document.querySelectorAll('input[type="time"]').forEach(input => {
+                if (!input.value) {
+                    input.value = currentTime;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
