@@ -1,969 +1,2223 @@
+```html
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --accent: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4ade80;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --gray: #6c757d;
-            --gray-light: #e9ecef;
-        }
-        
-        body {
-            background-color: #f5f7ff;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-        
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Navigation */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .tab-btn {
-            background-color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .tab-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-        
-        .tab-btn.active {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .tab-btn i {
-            font-size: 1.1rem;
-        }
-        
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            background-color: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            margin-bottom: 3rem;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Section Headers */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--gray-light);
-        }
-        
-        .section-header h2 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-header h2 i {
-            color: var(--accent);
-        }
-        
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        /* Button Styles */
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .btn i {
-            margin-right: 8px;
-        }
-        
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-        }
-        
-        .btn-success {
-            background-color: var(--success);
-        }
-        
-        .btn-warning {
-            background-color: var(--warning);
-        }
-        
-        /* Card Styles */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            border-left: 5px solid var(--primary);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .card p {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .card .amount {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--secondary);
-            margin: 1rem 0;
-        }
-        
-        /* Calendar & Apps Integration */
-        .integration-section {
-            margin-top: 3rem;
-            background-color: #f8f9ff;
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px dashed var(--accent);
-        }
-        
-        .integration-section h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .apps-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        .app-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            width: 180px;
-            text-align: center;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .app-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-        }
-        
-        .app-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .app-card h4 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .app-card p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--gray);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--gray-light);
-            margin-top: 2rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .tab-btn {
-                width: 90%;
-                justify-content: center;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-        }
-        
-        /* Data List */
-        .data-list {
-            margin-top: 2rem;
-        }
-        
-        .data-item {
-            background-color: var(--light);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .data-info h4 {
-            color: var(--primary);
-            margin-bottom: 0.3rem;
-        }
-        
-        .data-info p {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .data-actions {
-            display: flex;
-            gap: 10px;
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Untuk ADIK 🤍 — Pink Susu Edition</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Playfair+Display:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(135deg,#f8e7ed 0%,#f6dce5 48%,#f9e9ee 100%);
+    color:#4a3038;
+    font-family:"Poppins",sans-serif;
+    overflow-x:hidden;
+}
+
+body.lock{
+    overflow:hidden;
+}
+
+button{
+    font-family:inherit;
+}
+
+/* grain */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.035;
+
+    background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* glowing background */
+
+.glow{
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.12;
+    pointer-events:none;
+}
+
+.glow.one{
+    background:#e9a8bb;
+    top:-200px;
+    left:-180px;
+}
+
+.glow.two{
+    background:#d98da8;
+    right:-220px;
+    top:40%;
+}
+
+
+/* =========================================================
+   OPENING
+========================================================= */
+
+#opening{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+
+    background:#f8e7ed;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#opening.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.opening-content{
+    text-align:center;
+}
+
+.small-text{
+    font-family:"DM Mono",monospace;
+    font-size:10px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:#9a727e;
+}
+
+/* envelope */
+
+.envelope{
+    position:relative;
+
+    width:330px;
+    height:220px;
+
+    margin:35px auto;
+
+    cursor:pointer;
+
+    perspective:1000px;
+}
+
+.envelope-body{
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f3d7e0,
+            #ead0da
+        );
+
+    border:1px solid rgba(150,85,110,.18);
+
+    border-radius:10px;
+
+    box-shadow:
+        0 30px 100px rgba(90,40,58,.22);
+}
+
+.envelope-flap{
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:65%;
+
+    background:#e8c5d2;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin:top;
+
+    transition:
+        transform .9s
+        cubic-bezier(.2,.8,.2,1);
+
+    z-index:4;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(175deg);
+}
+
+.seal{
+    position:absolute;
+
+    z-index:5;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:60px;
+    height:60px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#d98fa8;
+
+    box-shadow:
+        0 0 40px rgba(220,140,160,.3);
+
+    font-size:24px;
+
+    transition:.5s;
+}
+
+.envelope.open .seal{
+    opacity:0;
+    transform:
+        translate(-50%,-50%)
+        scale(.4);
+}
+
+.opening-title{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            3rem,
+            10vw,
+            5rem
+        );
+
+    font-weight:400;
+}
+
+.opening-sub{
+    margin-top:10px;
+
+    color:#8f8589;
+
+    font-size:12px;
+}
+
+.tap{
+    display:inline-block;
+
+    margin-top:25px;
+
+    padding:10px 18px;
+
+    border:
+        1px solid
+        rgba(150,85,110,.18);
+
+    border-radius:100px;
+
+    color:#795563;
+
+    font-size:11px;
+}
+
+
+/* =========================================================
+   NAV
+========================================================= */
+
+nav{
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:75px;
+
+    padding:0 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    z-index:100;
+
+    background:
+        linear-gradient(
+            rgba(248,231,237,.78),
+            transparent
+        );
+
+    backdrop-filter:blur(8px);
+}
+
+.logo{
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+
+    letter-spacing:.2em;
+
+    color:#765460;
+}
+
+.song-pill{
+    border:
+        1px solid
+        rgba(150,85,110,.16);
+
+    background:
+        rgba(150,85,110,.07);
+
+    color:#765460;
+
+    border-radius:100px;
+
+    padding:8px 13px;
+
+    font-size:10px;
+
+    cursor:pointer;
+}
+
+.song-pill span{
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#c77d98;
+
+    margin-right:7px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+
+    padding:120px 20px 70px;
+
+    overflow:hidden;
+}
+
+.grid{
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(130,75,95,.07) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(130,75,95,.07) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.kicker{
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+
+    letter-spacing:.3em;
+
+    color:#a75f78;
+
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            5rem,
+            18vw,
+            13rem
+        );
+
+    line-height:.8;
+
+    font-weight:400;
+
+    letter-spacing:-.08em;
+
+    margin:25px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #e8a9bc,
+            #a66b7d
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.hero-description{
+    max-width:600px;
+
+    margin:auto;
+
+    color:#806671;
+
+    font-size:13px;
+
+    line-height:2;
+}
+
+.date{
+    margin-top:25px;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+
+    letter-spacing:.25em;
+
+    color:#b45f7b;
+}
+
+.scroll{
+    position:absolute;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#9c7883;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:9px;
+
+    letter-spacing:.2em;
+
+    text-transform:uppercase;
+}
+
+.scroll::after{
+    content:"";
+
+    display:block;
+
+    width:1px;
+    height:45px;
+
+    background:
+        linear-gradient(
+            #bd8398,
+            transparent
+        );
+
+    margin:10px auto;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section.content{
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:
+        130px 22px;
+}
+
+.section-label{
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+
+    letter-spacing:.25em;
+
+    color:#ad607c;
+
+    text-transform:uppercase;
+}
+
+section h2{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            2.8rem,
+            7vw,
+            5.5rem
+        );
+
+    line-height:1;
+
+    font-weight:400;
+
+    letter-spacing:-.05em;
+
+    margin:
+        15px 0 30px;
+}
+
+.lead{
+    max-width:700px;
+
+    color:#806671;
+
+    line-height:2;
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter-layout{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1.8fr;
+
+    gap:20px;
+
+    margin-top:45px;
+}
+
+.quote-box{
+    min-height:380px;
+
+    border:
+        1px solid
+        rgba(150,85,110,.14);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(150,85,110,.09),
+            rgba(255,255,255,.015)
+        );
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.quote{
+    font-family:"Playfair Display",serif;
+
+    font-size:32px;
+
+    line-height:1.25;
+}
+
+.quote-small{
+    font-family:"DM Mono",monospace;
+
+    font-size:9px;
+
+    letter-spacing:.2em;
+
+    color:#987681;
+
+    text-transform:uppercase;
+}
+
+.letter{
+    background:#fff4f7;
+
+    color:#4b3039;
+
+    border-radius:25px;
+
+    padding:
+        clamp(28px,5vw,55px);
+
+    box-shadow:
+        0 40px 100px
+        rgba(120,55,78,.16);
+}
+
+.letter p{
+    font-family:"Playfair Display",serif;
+
+    font-size:
+        clamp(
+            1.05rem,
+            2vw,
+            1.3rem
+        );
+
+    line-height:1.8;
+
+    margin-bottom:22px;
+}
+
+.letter .important{
+    font-size:
+        clamp(
+            1.35rem,
+            3vw,
+            2rem
+        );
+
+    line-height:1.4;
+}
+
+
+/* =========================================================
+   TRAITS
+========================================================= */
+
+.traits{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+
+    margin-top:45px;
+}
+
+.trait{
+    padding:28px;
+
+    min-height:190px;
+
+    border:
+        1px solid
+        rgba(150,85,110,.14);
+
+    border-radius:24px;
+
+    background:
+        rgba(150,85,110,.07);
+}
+
+.trait-number{
+    font-family:"DM Mono",monospace;
+
+    color:#9a7580;
+
+    font-size:10px;
+}
+
+.trait h3{
+    font-family:"Playfair Display",serif;
+
+    font-weight:400;
+
+    font-size:28px;
+
+    margin:
+        25px 0 10px;
+}
+
+.trait p{
+    color:#806671;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   PHOTO GALLERY
+========================================================= */
+
+.gallery{
+    margin-top:50px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(12,1fr);
+
+    gap:14px;
+}
+
+.photo{
+    position:relative;
+
+    min-height:260px;
+
+    border:0;
+
+    padding:0;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    background:#ead8de;
+
+    border:
+        1px solid
+        rgba(150,85,110,.12);
+}
+
+.photo:nth-child(1){
+    grid-column:span 7;
+    grid-row:span 2;
+}
+
+.photo:nth-child(2),
+.photo:nth-child(3){
+    grid-column:span 5;
+}
+
+.photo:nth-child(n+4){
+    grid-column:span 4;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+
+    min-height:inherit;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:
+        transform .7s ease,
+        filter .7s ease;
+}
+
+.photo:hover img{
+    transform:scale(1.05);
+
+    filter:
+        brightness(1.08)
+        saturate(1.1);
+}
+
+.photo::after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            transparent 45%,
+            rgba(60,30,42,.72)
+        );
+}
+
+.photo-number{
+    position:absolute;
+
+    top:15px;
+    left:15px;
+
+    z-index:2;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+
+    color:#fff;
+}
+
+.photo-caption{
+    position:absolute;
+
+    bottom:15px;
+    left:16px;
+    right:16px;
+
+    z-index:2;
+
+    color:white;
+
+    font-family:"Playfair Display",serif;
+
+    font-size:14px;
+
+    text-align:left;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-wrapper{
+    margin-top:45px;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(150,85,110,.14);
+
+    background:#2f1d25;
+}
+
+.video-wrapper video{
+    width:100%;
+
+    display:block;
+
+    max-height:700px;
+}
+
+.video-caption{
+    padding:20px;
+
+    color:#806671;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+.music-card{
+    margin-top:45px;
+
+    border:
+        1px solid
+        rgba(150,85,110,.14);
+
+    border-radius:28px;
+
+    padding:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(216,154,170,.08),
+            rgba(255,255,255,.02)
+        );
+}
+
+.music-info{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+        12px 8px 18px;
+}
+
+.song-title{
+    font-family:"Playfair Display",serif;
+
+    font-size:27px;
+}
+
+.song-artist{
+    color:#806671;
+
+    font-size:11px;
+}
+
+.music-button{
+    padding:10px 15px;
+
+    border:
+        1px solid
+        rgba(150,85,110,.16);
+
+    border-radius:100px;
+
+    background:
+        rgba(150,85,110,.08);
+
+    color:#6b4b57;
+
+    cursor:pointer;
+}
+
+.youtube{
+    aspect-ratio:16/9;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:#2f1d25;
+}
+
+.youtube iframe{
+    width:100%;
+    height:100%;
+
+    border:0;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final{
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+
+    padding:120px 20px;
+}
+
+.final-content{
+    max-width:850px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.final h2{
+    font-size:
+        clamp(
+            3rem,
+            8vw,
+            7rem
+        );
+}
+
+.final p{
+    max-width:650px;
+
+    margin:auto;
+
+    color:#806671;
+
+    line-height:2;
+}
+
+.heart-button{
+    margin-top:35px;
+
+    width:75px;
+    height:75px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(150,85,110,.18);
+
+    background:
+        rgba(150,85,110,.07);
+
+    color:#c96889;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.heart-button:hover{
+    transform:scale(1.12);
+
+    background:
+        rgba(216,154,170,.12);
+}
+
+.signature{
+    margin-top:25px;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:9px;
+
+    letter-spacing:.2em;
+
+    color:#a75f78;
+
+    text-transform:uppercase;
+}
+
+footer{
+    padding:30px;
+
+    text-align:center;
+
+    color:#9b7782;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:9px;
+
+    letter-spacing:.15em;
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+.lightbox{
+    position:fixed;
+
+    inset:0;
+
+    z-index:2000;
+
+    background:
+        rgba(55,29,40,.94);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+}
+
+.lightbox.active{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:90vw;
+
+    max-height:85vh;
+
+    object-fit:contain;
+
+    border-radius:12px;
+}
+
+.close,
+.prev,
+.next{
+    position:fixed;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(150,85,110,.18);
+
+    background:
+        rgba(150,85,110,.09);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:22px;
+}
+
+.close{
+    top:20px;
+    right:20px;
+}
+
+.prev{
+    left:20px;
+    top:50%;
+
+    transform:translateY(-50%);
+}
+
+.next{
+    right:20px;
+    top:50%;
+
+    transform:translateY(-50%);
+}
+
+.lightbox-caption{
+    position:fixed;
+
+    bottom:20px;
+
+    left:20px;
+    right:20px;
+
+    text-align:center;
+
+    font-family:"DM Mono",monospace;
+
+    font-size:10px;
+
+    color:#aaa;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+.reveal{
+    opacity:0;
+
+    transform:
+        translateY(30px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* hearts */
+
+.flying-heart{
+    position:fixed;
+
+    z-index:3000;
+
+    pointer-events:none;
+
+    color:#d96f91;
+
+    animation:
+        fly 1.5s ease-out forwards;
+}
+
+@keyframes fly{
+
+    0%{
+        transform:
+            translate(0,0)
+            scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            rotate(30deg)
+            scale(.3);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:750px){
+
+    nav{
+        padding:0 15px;
+    }
+
+    .song-pill{
+        padding:8px 10px;
+    }
+
+    .song-pill span{
+        margin-right:0;
+    }
+
+    .song-pill{
+        font-size:0;
+    }
+
+    .song-pill::after{
+        content:"♫";
+        font-size:13px;
+    }
+
+    section.content{
+        padding:
+            100px 16px;
+    }
+
+    .letter-layout{
+        grid-template-columns:1fr;
+    }
+
+    .quote-box{
+        min-height:220px;
+    }
+
+    .traits{
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .photo,
+    .photo:nth-child(n){
+        grid-column:span 1;
+
+        grid-row:span 1;
+
+        min-height:250px;
+    }
+
+    .photo:first-child{
+        grid-column:span 2;
+
+        min-height:380px;
+    }
+
+    .envelope{
+        width:290px;
+        height:195px;
+    }
+
+}
+
+</style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <h1><i class="fas fa-user-circle"></i> Personal Website</h1>
-            <p>Kelola keuangan dan waktu Anda dengan lebih efektif dan efisien</p>
+<body class="lock">
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
+<div class="glow one"></div>
+<div class="glow two"></div>
+<!-- =======================================================
+     OPENING
+======================================================= -->
+<div id="opening">
+<div class="opening-content">
+<div class="small-text">
+            ada sesuatu untuk adik
         </div>
-    </header>
-    
-    <div class="container">
-        <!-- Navigation Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="money-management">
-                <i class="fas fa-money-bill-wave"></i> Money Management
-            </button>
-            <button class="tab-btn" data-tab="time-management">
-                <i class="fas fa-clock"></i> Time Management
-            </button>
-            <button class="tab-btn" data-tab="integrations">
-                <i class="fas fa-link"></i> Integrasi & Aplikasi
-            </button>
+<div class="envelope" id="envelope">
+<div class="envelope-body"></div>
+<div class="envelope-flap"></div>
+<div class="seal">
+                ♥
+            </div>
+</div>
+<div class="opening-title">
+            Untuk ADIK.
         </div>
-        
-        <!-- Money Management Tab -->
-        <div class="tab-content active" id="money-management">
-            <div class="section-header">
-                <h2><i class="fas fa-coins"></i> Money Management</h2>
-                <button class="btn btn-success" id="add-money-data">
-                    <i class="fas fa-plus"></i> Tambah Data
-                </button>
-            </div>
-            
-            <!-- Pendataan Pemasukan -->
-            <div class="form-group">
-                <h3><i class="fas fa-arrow-down text-success"></i> Pendataan Pemasukan</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="income-source">Pemasukan dari mana?</label>
-                        <select id="income-source">
-                            <option value="">Pilih sumber pemasukan</option>
-                            <option value="gaji">Gaji</option>
-                            <option value="bisnis">Bisnis</option>
-                            <option value="investasi">Investasi</option>
-                            <option value="hadiah">Hadiah</option>
-                            <option value="lainnya">Lainnya</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="income-date">Tanggal & Jam</label>
-                        <input type="datetime-local" id="income-date">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="income-method">Cash / M-Banking?</label>
-                        <select id="income-method">
-                            <option value="cash">Cash</option>
-                            <option value="m-banking">M-Banking</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="income-bank">M-Banking apa? (jika pilih M-Banking)</label>
-                        <select id="income-bank">
-                            <option value="">Pilih bank</option>
-                            <option value="bca">BCA</option>
-                            <option value="mandiri">Mandiri</option>
-                            <option value="bri">BRI</option>
-                            <option value="bni">BNI</option>
-                            <option value="lainnya">Lainnya</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="income-amount">Jumlah Pemasukan</label>
-                    <input type="number" id="income-amount" placeholder="Masukkan jumlah pemasukan">
-                </div>
-                
-                <button class="btn btn-success">
-                    <i class="fas fa-save"></i> Simpan Pemasukan
-                </button>
-            </div>
-            
-            <!-- Pendataan Pengeluaran -->
-            <div class="form-group">
-                <h3><i class="fas fa-arrow-up text-danger"></i> Pendataan Pengeluaran</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="expense-for">Pengeluaran untuk apa?</label>
-                        <input type="text" id="expense-for" placeholder="Contoh: Beli makanan, transportasi, dll">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="expense-date">Tanggal & Jam</label>
-                        <input type="datetime-local" id="expense-date">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="expense-method">Cash / M-Banking?</label>
-                        <select id="expense-method">
-                            <option value="cash">Cash</option>
-                            <option value="m-banking">M-Banking</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="expense-bank">M-Banking apa? (jika pilih M-Banking)</label>
-                        <select id="expense-bank">
-                            <option value="">Pilih bank</option>
-                            <option value="bca">BCA</option>
-                            <option value="mandiri">Mandiri</option>
-                            <option value="bri">BRI</option>
-                            <option value="bni">BNI</option>
-                            <option value="lainnya">Lainnya</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="expense-amount">Jumlah Pengeluaran</label>
-                    <input type="number" id="expense-amount" placeholder="Masukkan jumlah pengeluaran">
-                </div>
-                
-                <button class="btn btn-warning">
-                    <i class="fas fa-save"></i> Simpan Pengeluaran
-                </button>
-            </div>
-            
-            <!-- Tabungan & Investasi -->
-            <div class="form-group">
-                <h3><i class="fas fa-piggy-bank text-primary"></i> Tabungan & Investasi</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="saving-type">Tabung / Investasi?</label>
-                        <select id="saving-type">
-                            <option value="tabungan">Tabungan</option>
-                            <option value="investasi">Investasi</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="saving-place">Dimana? (Nama bank/platform)</label>
-                        <input type="text" id="saving-place" placeholder="Contoh: Bank BCA, Bibit, Stockbit">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="saving-method">Cash / M-Banking?</label>
-                        <select id="saving-method">
-                            <option value="cash">Cash</option>
-                            <option value="m-banking">M-Banking</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="saving-amount">Jumlah</label>
-                    <input type="number" id="saving-amount" placeholder="Masukkan jumlah">
-                </div>
-                
-                <button class="btn">
-                    <i class="fas fa-save"></i> Simpan Data Tabungan/Investasi
-                </button>
-            </div>
-            
-            <!-- Data Ringkasan -->
-            <div class="cards-container">
-                <div class="card">
-                    <h3>Total Pemasukan <i class="fas fa-arrow-down text-success"></i></h3>
-                    <p class="amount">Rp 5.250.000</p>
-                    <p>Bulan ini: Rp 2.500.000</p>
-                    <p>Minggu ini: Rp 750.000</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Total Pengeluaran <i class="fas fa-arrow-up text-danger"></i></h3>
-                    <p class="amount">Rp 3.800.000</p>
-                    <p>Bulan ini: Rp 1.200.000</p>
-                    <p>Minggu ini: Rp 350.000</p>
-                </div>
-                
-                <div class="card">
-                    <h3>Tabungan & Investasi <i class="fas fa-piggy-bank text-primary"></i></h3>
-                    <p class="amount">Rp 12.500.000</p>
-                    <p>Tabungan: Rp 8.000.000</p>
-                    <p>Investasi: Rp 4.500.000</p>
-                </div>
-            </div>
+<div class="opening-sub">
+            buka pelan-pelan ya...
         </div>
-        
-        <!-- Time Management Tab -->
-        <div class="tab-content" id="time-management">
-            <div class="section-header">
-                <h2><i class="fas fa-clock"></i> Time Management</h2>
-                <button class="btn btn-success" id="add-schedule">
-                    <i class="fas fa-plus"></i> Tambah Jadwal
-                </button>
-            </div>
-            
-            <!-- Jam Kerja -->
-            <div class="form-group">
-                <h3><i class="fas fa-briefcase"></i> Jam Kerja</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="work-days">Hari apa saja?</label>
-                        <select id="work-days" multiple>
-                            <option value="senin">Senin</option>
-                            <option value="selasa">Selasa</option>
-                            <option value="rabu">Rabu</option>
-                            <option value="kamis">Kamis</option>
-                            <option value="jumat">Jumat</option>
-                            <option value="sabtu">Sabtu</option>
-                            <option value="minggu">Minggu</option>
-                        </select>
-                        <small>Tekan Ctrl untuk memilih lebih dari satu</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="work-start">Dari jam berapa?</label>
-                        <input type="time" id="work-start" value="08:00">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="work-end">Sampai jam berapa?</label>
-                        <input type="time" id="work-end" value="17:00">
-                    </div>
-                </div>
-                
-                <button class="btn">
-                    <i class="fas fa-save"></i> Simpan Jadwal Kerja
-                </button>
-            </div>
-            
-            <!-- Hari Main -->
-            <div class="form-group">
-                <h3><i class="fas fa-gamepad"></i> Hari Main / Rekreasi</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="play-day">Hari apa?</label>
-                        <select id="play-day">
-                            <option value="sabtu">Sabtu</option>
-                            <option value="minggu">Minggu</option>
-                            <option value="lainnya">Hari Lainnya</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="play-start">Dari jam berapa?</label>
-                        <input type="time" id="play-start" value="14:00">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="play-end">Sampai jam berapa?</label>
-                        <input type="time" id="play-end" value="20:00">
-                    </div>
-                </div>
-                
-                <button class="btn">
-                    <i class="fas fa-save"></i> Simpan Jadwal Main
-                </button>
-            </div>
-            
-            <!-- Jam Kuliah & Tugas -->
-            <div class="form-group">
-                <h3><i class="fas fa-graduation-cap"></i> Jam Kuliah & Tugas</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="study-days">Hari apa saja?</label>
-                        <select id="study-days" multiple>
-                            <option value="senin">Senin</option>
-                            <option value="selasa">Selasa</option>
-                            <option value="rabu">Rabu</option>
-                            <option value="kamis">Kamis</option>
-                            <option value="jumat">Jumat</option>
-                            <option value="sabtu">Sabtu</option>
-                        </select>
-                        <small>Tekan Ctrl untuk memilih lebih dari satu</small>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="study-start">Dari jam berapa?</label>
-                        <input type="time" id="study-start" value="18:00">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="study-end">Sampai jam berapa?</label>
-                        <input type="time" id="study-end" value="22:00">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="task-hours">Perkiraan jam untuk mengerjakan tugas (per minggu)</label>
-                    <input type="number" id="task-hours" placeholder="Contoh: 10" min="0">
-                </div>
-                
-                <button class="btn">
-                    <i class="fas fa-save"></i> Simpan Jadwal Kuliah & Tugas
-                </button>
-            </div>
-            
-            <!-- Jadwal Mingguan -->
-            <div class="cards-container">
-                <div class="card">
-                    <h3>Jadwal Hari Ini <i class="fas fa-calendar-day"></i></h3>
-                    <div class="data-list">
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Kerja</h4>
-                                <p>08:00 - 17:00</p>
-                            </div>
-                            <span class="badge" style="background-color:#4ade80; color:white; padding:3px 8px; border-radius:20px;">Aktif</span>
-                        </div>
-                        
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Kuliah</h4>
-                                <p>18:00 - 22:00</p>
-                            </div>
-                            <span class="badge" style="background-color:#f59e0b; color:white; padding:3px 8px; border-radius:20px;">Nanti</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3>Jadwal Besok <i class="fas fa-calendar-alt"></i></h3>
-                    <div class="data-list">
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Kerja</h4>
-                                <p>08:00 - 17:00</p>
-                            </div>
-                        </div>
-                        
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Main dengan teman</h4>
-                                <p>19:00 - 22:00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3>Statistik Waktu <i class="fas fa-chart-pie"></i></h3>
-                    <p>Total jam kerja/minggu: <strong>45 jam</strong></p>
-                    <p>Total jam kuliah/minggu: <strong>12 jam</strong></p>
-                    <p>Total jam tugas/minggu: <strong>10 jam</strong></p>
-                    <p>Total waktu luang/minggu: <strong>20 jam</strong></p>
-                </div>
-            </div>
+<div class="tap">
+            tap amplopnya 🤍
         </div>
-        
-        <!-- Integrations Tab -->
-        <div class="tab-content" id="integrations">
-            <div class="section-header">
-                <h2><i class="fas fa-link"></i> Integrasi & Aplikasi</h2>
-                <p>Terhubung dengan aplikasi eksternal untuk manajemen yang lebih baik</p>
-            </div>
-            
-            <div class="integration-section">
-                <h3>Terhubung ke Kalender</h3>
-                <p>Sinkronkan jadwal Anda dengan kalender favorit Anda</p>
-                
-                <div class="apps-container">
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fab fa-google"></i>
-                        </div>
-                        <h4>Google Calendar</h4>
-                        <p>Sinkronkan jadwal dengan Google Calendar</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                    
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fab fa-apple"></i>
-                        </div>
-                        <h4>Apple Calendar</h4>
-                        <p>Sinkronkan dengan kalender di perangkat Apple</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                    
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h4>Outlook Calendar</h4>
-                        <p>Integrasikan dengan Microsoft Outlook</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="integration-section">
-                <h3>Alarm & Pengingat</h3>
-                <p>Atur alarm dan pengingat untuk aktivitas penting</p>
-                
-                <div class="apps-container">
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fas fa-bell"></i>
-                        </div>
-                        <h4>Alarm Bawaan</h4>
-                        <p>Atur alarm langsung dari website ini</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Atur Alarm</button>
-                    </div>
-                    
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fab fa-google"></i>
-                        </div>
-                        <h4>Google Reminders</h4>
-                        <p>Buat pengingat di Google Assistant</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                    
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fab fa-apple"></i>
-                        </div>
-                        <h4>Apple Reminders</h4>
-                        <p>Integrasikan dengan Apple Reminders</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="integration-section">
-                <h3>Aplikasi Catatan (iOS)</h3>
-                <p>Terhubung dengan aplikasi catatan untuk mencatat hal penting</p>
-                
-                <div class="apps-container">
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fas fa-sticky-note"></i>
-                        </div>
-                        <h4>Apple Notes</h4>
-                        <p>Sinkronkan catatan dengan Apple Notes</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                    
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fab fa-evernote"></i>
-                        </div>
-                        <h4>Evernote</h4>
-                        <p>Integrasikan dengan Evernote</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                    
-                    <div class="app-card">
-                        <div class="app-icon">
-                            <i class="fas fa-notes-medical"></i>
-                        </div>
-                        <h4>Notion</h4>
-                        <p>Terhubung dengan Notion untuk catatan lengkap</p>
-                        <button class="btn btn-small" style="margin-top:10px;">Hubungkan</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="cards-container">
-                <div class="card">
-                    <h3>Status Integrasi <i class="fas fa-plug"></i></h3>
-                    <div class="data-list">
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Google Calendar</h4>
-                                <p>Terhubung - Terakhir sinkron: 2 jam lalu</p>
-                            </div>
-                            <span class="badge" style="background-color:#4ade80; color:white; padding:3px 8px; border-radius:20px;">Aktif</span>
-                        </div>
-                        
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Apple Notes</h4>
-                                <p>Siap dihubungkan</p>
-                            </div>
-                            <button class="btn btn-small">Hubungkan</button>
-                        </div>
-                        
-                        <div class="data-item">
-                            <div class="data-info">
-                                <h4>Alarm Bawaan</h4>
-                                <p>3 alarm aktif</p>
-                            </div>
-                            <span class="badge" style="background-color:#4ade80; color:white; padding:3px 8px; border-radius:20px;">Aktif</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <footer>
-            <p>Personal Website &copy; 2023 | Dibuat dengan <i class="fas fa-heart" style="color:#ef4444;"></i> untuk manajemen kehidupan yang lebih baik</p>
-            <p>Website ini responsif dan dapat diakses dari perangkat mobile maupun desktop</p>
-        </footer>
+</div>
+</div>
+<!-- =======================================================
+     WEBSITE
+======================================================= -->
+<div id="website">
+<!-- NAV -->
+<nav>
+<div class="logo">
+        A / 27.09.26
     </div>
-    
-    <script>
-        // Tab Switching Functionality
-        document.querySelectorAll('.tab-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons and content
-                document.querySelectorAll('.tab-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Add active class to clicked button
-                button.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-        
-        // Form Submission Simulation
-        document.querySelectorAll('.btn').forEach(button => {
-            if (button.textContent.includes('Simpan')) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Data berhasil disimpan!');
-                });
-            }
-        });
-        
-        // Connect Button Simulation
-        document.querySelectorAll('.btn-small').forEach(button => {
-            if (button.textContent.includes('Hubungkan')) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Aplikasi berhasil dihubungkan!');
-                });
-            }
+<button class="song-pill" id="topMusic">
+<span></span>
+        ABOUT YOU · THE 1975
+
+    </button>
+</nav>
+<!-- =======================================================
+     HERO
+======================================================= -->
+<section class="hero">
+<div class="grid"></div>
+<div class="hero-content">
+<div class="kicker reveal">
+            happy birthday, my favorite person
+        </div>
+<h1 class="reveal">
+            ADIK
+        </h1>
+<p class="hero-description reveal">
+
+            abang nggak pandai bikin kata-kata.
+
+            Jadi abang bikin satu tempat kecil
+            buat nyimpen beberapa hal
+            yang sebenarnya pengen abang bilang
+            langsung ke adik.
+
+        </p>
+<div class="date reveal">
+            27 · 09 · 2026
+        </div>
+</div>
+<div class="scroll">
+        scroll pelan-pelan
+    </div>
+</section>
+<!-- =======================================================
+     LETTER
+======================================================= -->
+<section class="content">
+<div class="section-label reveal">
+        01 · surat kecil
+    </div>
+<h2 class="reveal">
+
+        Untuk adik,<br/>
+
+        yang selalu punya cara<br/>
+
+        sendiri buat bikin abang nyaman.
+
+    </h2>
+<div class="letter-layout">
+<div class="quote-box reveal">
+<div class="quote">
+
+                "Abang nggak butuh
+                kata-kata yang sempurna.
+
+                Abang cuma mau adik tahu
+                apa yang abang rasakan."
+            </div>
+<div class="quote-small">
+                from me · with love
+            </div>
+</div>
+<div class="letter reveal">
+<p>
+                Selamat ulang tahun, Adik.
+            </p>
+<p>
+
+                Abang sebenarnya nggak terlalu
+                pandai bikin kata-kata.
+
+                Jadi kalau tulisan ini sederhana,
+                ya memang begini caraku
+                ngomong sama adik.
+
+            </p>
+<p>
+
+                Abang suka adik yang manja.
+
+                Abang suka waktu adik perhatian
+                sama abang, bahkan lewat hal-hal
+                kecil yang kadang mungkin
+                nggak adik anggap penting.
+
+            </p>
+<p>
+
+                Dan entah kenapa,
+                waktu adik marah pun
+                abang malah sering merasa
+                gemes sendiri.
+
+                Apalagi kalau cara marah adik
+                sudah mirip sama mama abang.
+
+                Kedengarannya mungkin aneh,
+                tapi justru ada sesuatu dari situ
+                yang bikin abang merasa dekat sama adik.
+
+            </p>
+<p>
+
+                Ada banyak sifat adik
+                yang mengingatkan abang sama mama:
+
+                penyayang, perhatian,
+                dan punya cara sendiri
+                untuk peduli sama orang
+                yang adik sayang.
+
+                Mungkin itu salah satu alasan
+                kenapa abang bisa merasa nyaman
+                sama adik.
+
+            </p>
+<p class="important">
+
+                Yang paling abang suka
+                bukan cuma saat adik bahagia.
+
+                Abang suka saat adik jadi
+                diri adik sendiri di dekat abang —
+
+                termasuk saat adik manja.
+
+            </p>
+<p>
+
+                Terima kasih sudah hadir,
+                sudah sayang sama abang,
+                dan sudah menjadi bagian
+                dari hari-hari abang.
+
+                Abang nggak janji semuanya
+                akan selalu mudah.
+
+                Tapi abang mau kita terus belajar
+                memahami satu sama lain.
+
+            </p>
+<p class="important">
+
+                Ayo terus kita untuk selamanya,
+                saling belajar dan mengajari.
+
+            </p>
+<p>
+
+                Selamat ulang tahun, Adik.
+
+                Semoga umur yang baru ini
+                membawa banyak hal baik
+                buat adik.
+
+                Dan semoga abang masih boleh
+                jadi salah satu orang
+                yang nemenin adik
+                melewati banyak cerita
+                setelah hari ini.
+
+            </p>
+</div>
+</div>
+</section>
+<!-- =======================================================
+     THREE THINGS
+======================================================= -->
+<section class="content">
+<div class="section-label reveal">
+        02 · kenapa adik
+    </div>
+<h2 class="reveal">
+
+        Tiga hal kecil<br/>
+        yang abang suka dari adik.
+
+    </h2>
+<div class="traits">
+<div class="trait reveal">
+<div class="trait-number">
+                01
+            </div>
+<h3>
+                Manja.
+            </h3>
+<p>
+
+                Jujur,
+                ini salah satu versi adik
+                yang paling abang suka.
+
+                Jangan berubah cuma karena
+                adik merasa terlalu manja.
+
+            </p>
+</div>
+<div class="trait reveal">
+<div class="trait-number">
+                02
+            </div>
+<h3>
+                Perhatian.
+            </h3>
+<p>
+
+                Adik punya cara sederhana
+                buat bikin abang merasa
+                diperhatikan.
+
+                Kadang kecil,
+                tapi abang sadar.
+
+            </p>
+</div>
+<div class="trait reveal">
+<div class="trait-number">
+                03
+            </div>
+<h3>
+                Penyayang.
+            </h3>
+<p>
+
+                Ada banyak sisi adik
+                yang terasa hangat
+                dan familiar.
+
+                Dan abang suka rasa nyaman
+                yang datang dari sana.
+
+            </p>
+</div>
+</div>
+</section>
+<!-- =======================================================
+     PHOTO GALLERY
+======================================================= -->
+<section class="content">
+<div class="section-label reveal">
+        03 · our little archive
+    </div>
+<h2 class="reveal">
+
+        Beberapa momen<br/>
+        yang abang simpan.
+
+    </h2>
+<p class="lead reveal">
+
+        Nggak semuanya harus jadi
+        momen besar.
+
+        Kadang foto sederhana justru
+        yang paling enak dilihat lagi
+        bertahun-tahun setelahnya.
+
+    </p>
+<div class="gallery"><button class="photo reveal"><img alt="Memory 01" src="images/foto01.jpeg"/><span class="photo-number">01</span><span class="photo-caption">momen kecil yang abang simpan baik-baik</span></button><button class="photo reveal"><img alt="Memory 02" src="images/foto02.jpeg"/><span class="photo-number">02</span><span class="photo-caption">senyum dan cerita yang bikin hari terasa lebih hangat</span></button><button class="photo reveal"><img alt="Memory 03" src="images/foto03.jpeg"/><span class="photo-number">03</span><span class="photo-caption">salah satu momen yang pengen abang ingat terus</span></button><button class="photo reveal"><img alt="Memory 04" src="images/foto04.jpeg"/><span class="photo-number">04</span><span class="photo-caption">sesederhana ini, tapi tetap terasa spesial</span></button><button class="photo reveal"><img alt="Memory 05" src="images/foto05.jpeg"/><span class="photo-number">05</span><span class="photo-caption">kalau sama adik, momen biasa pun jadi berarti</span></button><button class="photo reveal"><img alt="Memory 06" src="images/foto06.jpeg"/><span class="photo-number">06</span><span class="photo-caption">versi kita yang paling abang suka: apa adanya</span></button><button class="photo reveal"><img alt="Memory 07" src="images/foto07.jpeg"/><span class="photo-number">07</span><span class="photo-caption">cerita kecil yang semoga terus bertambah</span></button><button class="photo reveal"><img alt="Memory 08" src="images/foto08.jpeg"/><span class="photo-number">08</span><span class="photo-caption">satu lagi kenangan yang abang simpan</span></button><button class="photo reveal"><img alt="Memory 09" src="images/foto09.jpeg"/><span class="photo-number">09</span><span class="photo-caption">adik dengan segala lucu dan manisnya</span></button><button class="photo reveal"><img alt="Memory 10" src="images/foto10.jpeg"/><span class="photo-number">10</span><span class="photo-caption">kalau waktu bisa disimpan, abang pilih momen seperti ini</span></button><button class="photo reveal"><img alt="Memory 11" src="images/foto11.jpeg"/><span class="photo-number">11</span><span class="photo-caption">untuk nanti kita lihat dan senyum bareng</span></button><button class="photo reveal"><img alt="Memory 12" src="images/foto12.jpeg"/><span class="photo-number">12</span><span class="photo-caption">satu foto spesial untuk menutup galeri ini</span></button></div>
+</section>
+<!-- =======================================================
+     VIDEO
+======================================================= -->
+<section class="content">
+<div class="section-label reveal">
+        04 · one more memory
+    </div>
+<h2 class="reveal">
+
+        Biar satu momen<br/>
+        nggak cuma jadi foto.
+
+    </h2>
+<div class="video-wrapper reveal">
+<video controls="" playsinline="" preload="metadata">
+<!-- VIDEO BARU YANG KAU KIRIM -->
+<source src="memory-video.mp4" type="video/mp4"/>
+
+            Browser kamu tidak mendukung video.
+
+        </video>
+<div class="video-caption">
+
+            Satu momen kecil dari kita.
+
+            Simpan baik-baik,
+            karena suatu hari nanti
+            mungkin kita bakal kangen
+            versi kita yang sekarang.
+
+        </div>
+</div>
+</section>
+<!-- =======================================================
+     SONG
+======================================================= -->
+<section class="content">
+<div class="section-label reveal">
+        05 · our song
+    </div>
+<h2 class="reveal">
+        About You.
+    </h2>
+<p class="lead reveal">
+
+        abang pilih lagu ini karena ada
+        sesuatu dari suasananya yang cocok
+        sama cara abang melihat adik
+        dan semua hal yang belum selesai
+        kita ceritakan.
+
+    </p>
+<div class="music-card reveal">
+<div class="music-info">
+<div>
+<div class="song-title">
+                    About You
+                </div>
+<div class="song-artist">
+                    The 1975
+                </div>
+</div>
+<button class="music-button" id="playSong">
+
+                ▶ PLAY
+
+            </button>
+</div>
+<div class="youtube" id="youtubeBox">
+</div>
+</div>
+</section>
+<!-- =======================================================
+     FINAL
+======================================================= -->
+<section class="final">
+<div class="final-content">
+<div class="section-label reveal">
+            06 · terakhir
+        </div>
+<h2 class="reveal">
+
+            Kalau nanti kita<br/>
+            sampai di banyak tahun<br/>
+            setelah ini...
+
+        </h2>
+<p class="reveal">
+
+            abang harap kita masih jadi
+            dua orang yang mau saling belajar,
+            saling mengerti,
+            dan saling mengajari.
+
+            Nggak harus sempurna.
+
+            Yang penting tetap memilih
+            untuk tumbuh bareng.
+
+        </p>
+<button class="heart-button reveal" id="heart">
+
+            ♥
             
-            if (button.textContent.includes('Atur Alarm')) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const alarmTime = prompt('Masukkan waktu untuk alarm (HH:MM):', '08:00');
-                    if (alarmTime) {
-                        alert(`Alarm berhasil diatur untuk pukul ${alarmTime}`);
+        </button>
+<div class="signature reveal">
+
+            HAPPY BIRTHDAY, ADIK
+            ·
+            DARI ABANG 🤍
+
+        </div>
+</div>
+</section>
+<footer>
+
+    MADE WITH A LITTLE BIT OF LOVE · 2026
+
+</footer>
+</div>
+<!-- =======================================================
+     LIGHTBOX
+======================================================= -->
+<div class="lightbox" id="lightbox">
+<button class="close" id="close">
+
+        ×
+
+    </button>
+<button class="prev" id="prev">
+
+        ‹
+
+    </button>
+<img alt="" id="lightboxImage" src=""/>
+<button class="next" id="next">
+
+        ›
+
+    </button>
+<div class="lightbox-caption" id="lightboxCaption">
+</div>
+</div>
+<script>
+
+/* =========================================================
+   OPENING
+========================================================= */
+
+const opening =
+    document.getElementById("opening");
+
+const envelope =
+    document.getElementById("envelope");
+
+const website =
+    document.getElementById("website");
+
+
+envelope.addEventListener(
+    "click",
+    function(){
+
+        envelope.classList.add("open");
+
+        setTimeout(
+            function(){
+
+                opening.classList.add("hide");
+
+                document.body.classList.remove("lock");
+
+                website.style.opacity = "1";
+
+                revealElements();
+
+            },
+            900
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        function(entries){
+
+            entries.forEach(
+                function(entry){
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
                     }
-                });
+
+                }
+            );
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+
+function revealElements(){
+
+    document
+        .querySelectorAll(".reveal")
+        .forEach(
+            function(el,index){
+
+                setTimeout(
+                    function(){
+
+                        el.classList.add("show");
+
+                    },
+                    index * 45
+                );
+
+                observer.observe(el);
+
             }
-        });
-        
-        // Add Money Data Button
-        document.getElementById('add-money-data').addEventListener('click', function() {
-            alert('Fitur tambah data keuangan akan membuka form lengkap');
-        });
-        
-        // Add Schedule Button
-        document.getElementById('add-schedule').addEventListener('click', function() {
-            alert('Fitur tambah jadwal akan membuka form jadwal lengkap');
-        });
-        
-        // Initialize with current date/time for forms
-        window.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            const currentDateTime = now.toISOString().slice(0, 16);
-            
-            // Set current date/time to date inputs
-            document.querySelectorAll('input[type="datetime-local"]').forEach(input => {
-                if (!input.value) {
-                    input.value = currentDateTime;
-                }
-            });
-            
-            // Set current time to time inputs
-            const currentTime = now.toTimeString().slice(0, 5);
-            document.querySelectorAll('input[type="time"]').forEach(input => {
-                if (!input.value) {
-                    input.value = currentTime;
-                }
-            });
-        });
-    </script>
+        );
+
+}
+
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            revealElements,
+            1200
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   MUSIC — ABOUT YOU
+========================================================= */
+
+let songLoaded = false;
+
+
+function loadSong(){
+
+    if(songLoaded){
+        return;
+    }
+
+    const box =
+        document.getElementById(
+            "youtubeBox"
+        );
+
+
+    const iframe =
+        document.createElement(
+            "iframe"
+        );
+
+
+    iframe.src =
+        "https://www.youtube.com/embed/tGv7CUutzqU?rel=0&playsinline=1";
+
+    iframe.title =
+        "The 1975 - About You";
+
+    iframe.allow =
+        "autoplay; encrypted-media; picture-in-picture";
+
+    iframe.allowFullscreen = true;
+
+
+    box.appendChild(
+        iframe
+    );
+
+
+    songLoaded = true;
+
+}
+
+
+document
+    .getElementById("playSong")
+    .addEventListener(
+        "click",
+        function(){
+
+            loadSong();
+
+            document
+                .getElementById("youtubeBox")
+                .scrollIntoView({
+                    behavior:"smooth",
+                    block:"center"
+                });
+
+        }
+    );
+
+
+document
+    .getElementById("topMusic")
+    .addEventListener(
+        "click",
+        function(){
+
+            loadSong();
+
+            document
+                .getElementById("youtubeBox")
+                .scrollIntoView({
+                    behavior:"smooth",
+                    block:"center"
+                });
+
+        }
+    );
+
+
+
+/* =========================================================
+   PHOTO LIGHTBOX
+========================================================= */
+
+const photoButtons =
+    document.querySelectorAll(
+        ".photo"
+    );
+
+const lightbox =
+    document.getElementById(
+        "lightbox"
+    );
+
+const lightboxImage =
+    document.getElementById(
+        "lightboxImage"
+    );
+
+const lightboxCaption =
+    document.getElementById(
+        "lightboxCaption"
+    );
+
+
+let currentPhoto = 0;
+
+
+function openPhoto(index){
+
+    currentPhoto = index;
+
+    const button =
+        photoButtons[index];
+
+    const image =
+        button.querySelector(
+            "img"
+        );
+
+    const caption =
+        button.querySelector(
+            ".photo-caption"
+        );
+
+
+    lightboxImage.src =
+        image.src;
+
+    lightboxCaption.textContent =
+        caption.textContent;
+
+
+    lightbox.classList.add(
+        "active"
+    );
+
+}
+
+
+photoButtons.forEach(
+    function(button,index){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                openPhoto(index);
+
+            }
+        );
+
+    }
+);
+
+
+
+function closePhoto(){
+
+    lightbox.classList.remove(
+        "active"
+    );
+
+}
+
+
+function nextPhoto(){
+
+    currentPhoto++;
+
+    if(
+        currentPhoto >=
+        photoButtons.length
+    ){
+
+        currentPhoto = 0;
+
+    }
+
+    openPhoto(currentPhoto);
+
+}
+
+
+function previousPhoto(){
+
+    currentPhoto--;
+
+    if(
+        currentPhoto < 0
+    ){
+
+        currentPhoto =
+            photoButtons.length - 1;
+
+    }
+
+    openPhoto(currentPhoto);
+
+}
+
+
+document
+    .getElementById("close")
+    .onclick =
+    closePhoto;
+
+
+document
+    .getElementById("next")
+    .onclick =
+    nextPhoto;
+
+
+document
+    .getElementById("prev")
+    .onclick =
+    previousPhoto;
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            !lightbox.classList.contains(
+                "active"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closePhoto();
+
+        }
+
+
+        if(
+            event.key === "ArrowRight"
+        ){
+
+            nextPhoto();
+
+        }
+
+
+        if(
+            event.key === "ArrowLeft"
+        ){
+
+            previousPhoto();
+
+        }
+
+    }
+);
+
+
+
+lightbox.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === lightbox
+        ){
+
+            closePhoto();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   HEART EFFECT
+========================================================= */
+
+document
+    .getElementById("heart")
+    .addEventListener(
+        "click",
+        function(event){
+
+            const x =
+                event.clientX;
+
+            const y =
+                event.clientY;
+
+
+            for(
+                let i = 0;
+                i < 35;
+                i++
+            ){
+
+                const heart =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                heart.className =
+                    "flying-heart";
+
+                heart.innerHTML =
+                    Math.random() > .3
+                    ? "♥"
+                    : "✦";
+
+
+                heart.style.left =
+                    x + "px";
+
+                heart.style.top =
+                    y + "px";
+
+
+                heart.style.setProperty(
+                    "--x",
+                    (
+                        Math.random() * 500
+                        - 250
+                    ) + "px"
+                );
+
+
+                heart.style.setProperty(
+                    "--y",
+                    (
+                        Math.random() * -400
+                        - 50
+                    ) + "px"
+                );
+
+
+                heart.style.fontSize =
+                    (
+                        Math.random() * 15
+                        + 10
+                    ) + "px";
+
+
+                document.body.appendChild(
+                    heart
+                );
+
+
+                setTimeout(
+                    function(){
+
+                        heart.remove();
+
+                    },
+                    1600
+                );
+
+            }
+
+        }
+    );
+
+</script>
 </body>
 </html>
+```
